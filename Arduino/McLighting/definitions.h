@@ -1,4 +1,4 @@
-#define USE_WS2812FX_DMA 0      // 0 = Used PIN is ignored & set to RX/GPIO3; 1 = Used PIN is ignored & set to TX/GPIO1; 2 = Uses PIN is ignored & set to D4/GPIO2;  Uses WS2812FX, see: https://github.com/kitesurfer1404/WS2812FX
+#define USE_WS2812FX_DMA 1      // 0 = Used PIN is ignored & set to RX/GPIO3; 1 = Used PIN is ignored & set to TX/GPIO1; 2 = Uses PIN is ignored & set to D4/GPIO2;  Uses WS2812FX, see: https://github.com/kitesurfer1404/WS2812FX
                                 // or comment it out
 #if defined(USE_WS2812FX_DMA)
   #define MAXLEDS 384           // due to memory limit of esp8266 at the moment only 384 leds are supported in DMA Mode. More can crash if mqtt is used.
@@ -7,17 +7,17 @@
 #endif 
 // Neopixel
 #define LED_PIN 3          // PIN (15 / D8) where neopixel / WS2811 strip is attached; is configurable, if USE_WS2812FX_DMA is not defined. Just for the start
-#define NUMLEDS 50         // Number of leds in the; is configurable just for the start 
+#define NUMLEDS 300         // Number of leds in the; is configurable just for the start 
 #define RGBORDER "GRBW"    // RGBOrder; is configurable just for the start
 #define FX_OPTIONS 48      // ws2812fx Options 48 = SIZE_SMALL + FADE_MEDIUM  is configurable just for the start; for WS2812FX setSegment OPTIONS, see: https://github.com/kitesurfer1404/WS2812FX/blob/master/extras/WS2812FX%20Users%20Guide.md
 //#define LED_TYPE_WS2811    // Uncomment, if LED type uses 400 KHz (classic 'v1' (not v2) FLORA pixels, WS2811 drivers)
 #define LED_BUILTIN 2      // ESP-12F has the built in LED on GPIO2, see https://github.com/esp8266/Arduino/issues/2192
-#define POWER_SUPPLY 12    // PIN (12 / D6) If defined, enable output to control external power supply 
+//#define POWER_SUPPLY 12    // PIN (12 / D6) If defined, enable output to control external power supply 
 #if defined(POWER_SUPPLY)
   #define POWER_ON   HIGH           // Define the output state to turn on the power supply, either HIGH or LOW.  Opposite will be uses for power off.
 #endif 
 
-char HOSTNAME[65] = "McLightingRGBW"; // Friedly hostname  is configurable just for the start. Hostname should not contain spaces as this can break Home Assistant discovery if used.
+char HOSTNAME[65] = "BaselineNode"; // Friedly hostname  is configurable just for the start. Hostname should not contain spaces as this can break Home Assistant discovery if used.
 
 #define ENABLE_OTA 1                  // If defined, enable Arduino OTA code. If set to 0 enable Arduino OTA code, if set to 1 enable ESP8266HTTPUpdateServer OTA code.
 #define ENABLE_MQTT 1                 // If defined use MQTT OR AMQTT, if set to 0 enable MQTT client code, see: https://github.com/toblum/McLighting/wiki/MQTT-API, if set to 1, enable Async MQTT code, see: https://github.com/marvinroger/async-mqtt-client
@@ -57,8 +57,8 @@ char HOSTNAME[65] = "McLightingRGBW"; // Friedly hostname  is configurable just 
 //#define WIFIMGR_SET_MANUAL_IP
 
 #if defined(WIFIMGR_SET_MANUAL_IP)
-  uint8_t _ip[4] = {192,168,0,128};
-  uint8_t _gw[4] = {192,168,0,1};
+  uint8_t _ip[4] = {10,1,10,550};
+  uint8_t _gw[4] = {10,1,10,1};
   uint8_t _sn[4] = {255,255,255,0};
 #endif
 
